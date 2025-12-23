@@ -1,0 +1,32 @@
+<h2>{{ isEdit ? 'Edit Doctor' : 'Create Doctor' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form">
+  <label>
+    First name
+    <input type="text" formControlName="firstName">
+  </label>
+
+  <label>
+    Last name
+    <input type="text" formControlName="lastName">
+  </label>
+
+  <label>
+    Specialty
+    <input type="text" formControlName="specialty">
+  </label>
+
+  <label>
+    Email
+    <input type="email" formControlName="email">
+  </label>
+
+  <div class="error" *ngIf="error">{{ error }}</div>
+
+  <div class="actions">
+    <button type="submit" [disabled]="loading">
+      {{ loading ? 'Saving...' : 'Save' }}
+    </button>
+    <button type="button" (click)="cancel()" [disabled]="loading">Cancel</button>
+  </div>
+</form>

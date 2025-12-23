@@ -1,0 +1,56 @@
+<h2>{{ isEdit ? 'Edit Appointment' : 'Create Appointment' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form">
+
+  <label>
+    Patient
+    <select formControlName="patientId">
+      <option [ngValue]="null" disabled>Select a patient</option>
+      <option *ngFor="let p of patients" [ngValue]="p.id">
+        {{ p.firstName }} {{ p.lastName }}
+      </option>
+    </select>
+  </label>
+
+  <label>
+    Doctor
+    <select formControlName="doctorId">
+      <option [ngValue]="null" disabled>Select a doctor</option>
+      <option *ngFor="let d of doctors" [ngValue]="d.id">
+        {{ d.firstName }} {{ d.lastName }}
+      </option>
+    </select>
+  </label>
+
+  <label>
+    Date & time
+    <input type="datetime-local" formControlName="dateTime">
+  </label>
+
+  <!-- ✅ Past date error -->
+  <div class="error"
+       *ngIf="form.get('dateTime')?.touched && form.get('dateTime')?.errors?.['pastDate']">
+    Date/time cannot be in the past.
+  </div>
+
+  <label>
+    Reason
+    <input type="text" formControlName="reason">
+  </label>
+
+  <label>
+    Status
+    <select formControlName="status">
+      <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+    </select>
+  </label>
+
+  <div class="error" *ngIf="error">{{ error }}</div>
+
+  <div class="actions">
+    <button type="submit" [disabled]="loading">
+      {{ loading ? 'Saving...' : 'Save' }}
+    </button>
+    <button type="button" (click)="cancel()" [disabled]="loading">Cancel</button>
+  </div>
+</form>

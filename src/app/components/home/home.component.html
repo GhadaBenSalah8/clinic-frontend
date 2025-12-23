@@ -1,0 +1,148 @@
+<div class="page">
+
+    <!-- Top dashboard card -->
+    <section class="dashboard">
+      <div class="logoWrap">
+        <!-- simplest -->
+        <img class="logo" 
+        src="https://www.shutterstock.com/image-vector/clinic-logo-butterfly-health-600nw-2553935777.jpg" 
+        alt="Clinic logo" />
+      </div>
+  
+      <div class="dashBody">
+        <div class="dashHeader">
+          <div class="dashTitle">
+            <span class="clinicName">{{ clinicName }}</span>
+            <span class="dot">•</span>
+            <span class="role">{{ roleLabel }}</span>
+          </div>
+  
+          <div class="tabs">
+            <button
+              class="tab"
+              [class.active]="activeTab === 'overview'"
+              type="button"
+              (click)="setTab('overview')"
+            >
+              Overview
+            </button>
+  
+            <button
+              class="tab"
+              [class.active]="activeTab === 'branches'"
+              type="button"
+              (click)="setTab('branches')"
+            >
+              Branches
+            </button>
+          </div>
+        </div>
+  
+        <div *ngIf="loading" class="muted">Loading...</div>
+        <div *ngIf="error" class="error">{{ error }}</div>
+  
+        <!-- Overview -->
+        <ng-container *ngIf="!loading && !error && activeTab === 'overview'">
+            <div class="stats" *ngIf="!loading && !error">
+                <div
+                  class="stat-card stat-doctors clickable"
+                  routerLink="/doctors"
+                  tabindex="0"
+                  role="link"
+                  aria-label="Go to doctors"
+                >
+                  <div class="stat-top">
+                    <div class="stat-title">Doctors</div>
+                    <div class="stat-icon">🩺</div>
+                  </div>
+                  <div class="stat-number">{{ doctorsCount }}</div>
+                </div>
+              
+                <div
+                  class="stat-card stat-patients clickable"
+                  routerLink="/patients"
+                  tabindex="0"
+                  role="link"
+                  aria-label="Go to patients"
+                >
+                  <div class="stat-top">
+                    <div class="stat-title">Patients</div>
+                    <div class="stat-icon">👤</div>
+                  </div>
+                  <div class="stat-number">{{ patientsCount }}</div>
+                </div>
+              
+                <div
+                  class="stat-card stat-appointments clickable"
+                  routerLink="/appointments"
+                  tabindex="0"
+                  role="link"
+                  aria-label="Go to appointments"
+                >
+                  <div class="stat-top">
+                    <div class="stat-title">Appointments</div>
+                    <div class="stat-icon">📅</div>
+                  </div>
+                  <div class="stat-number">{{ appointmentsCount }}</div>
+                </div>
+              
+              </div>
+              
+              
+  
+          <div class="overviewBlock">
+            <div class="overviewText">
+              <h3>Welcome, {{ roleLabel }}!</h3>
+              <p>
+                Efficiently manage all aspects of your clinic from a single, intuitive dashboard.
+                You have complete control to add, edit, and delete patients, doctors, appointments,
+                and prescriptions, ensuring that your clinic runs smoothly and accurately.
+              </p>
+              <p>
+                Keep patient records organized, coordinate doctor schedules effortlessly,
+                streamline appointment management, and oversee prescriptions with precision.
+                Our system is designed to reduce administrative workload, improve operational
+                efficiency, and empower you to focus on delivering exceptional healthcare services.
+              </p>
+            </div>
+  
+            <!-- “some pictures” (put these images in src/assets/) -->
+            <div class="overviewPics">
+              <img src="https://www.shutterstock.com/image-photo/diverse-male-female-medical-professionals-260nw-2557673895.jpg" alt="Clinic overview" />
+              <img src="https://plus.unsplash.com/premium_photo-1681843126728-04eab730febe?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNhbCUyMHRlYW18ZW58MHx8MHx8fDA%3D" alt="Healthcare team" />
+            </div>
+          </div>
+        </ng-container>
+  
+        <!-- Branches -->
+        <ng-container *ngIf="!loading && !error && activeTab === 'branches'">
+          <div class="branchesHeader">
+            <h3>Branches</h3>
+            <p class="muted">Departments and services available in our clinic.</p>
+          </div>
+  
+          <div class="branchesGrid">
+            <div class="branchCard" *ngFor="let b of branches">
+              <div class="branchIcon">🏥</div>
+              <div class="branchInfo">
+                <div class="branchName">{{ b.name }}</div>
+                <div class="branchDesc">{{ b.desc }}</div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="branchesPics">
+            <img 
+            src="https://medicine.uky.edu/sites/default/files/styles/feature_header_image/public/2022-05/Screen%20Shot%202022-05-11%20at%2012.16.42%20AM.png.webp?itok=Kk46ZC8p"
+            alt="Clinic departments" />
+            <img 
+            src="https://st4.depositphotos.com/1907633/19684/i/450/depositphotos_196846686-stock-photo-general-medical-services-gms-general.jpg" 
+            alt="Medical services" />
+          </div>
+        </ng-container>
+  
+      </div>
+    </section>
+  
+  </div>
+  

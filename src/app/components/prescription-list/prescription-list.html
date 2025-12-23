@@ -1,0 +1,37 @@
+<div
+  style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px"
+>
+  <h2 style="margin: 0">Prescriptions</h2>
+  <a routerLink="/prescriptions/new">+ Add prescription</a>
+</div>
+
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<table *ngIf="!loading && !error">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Medicine</th>
+      <th>Dosage</th>
+      <th>Appointment</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let p of prescriptions">
+      <td>{{ p.id }}</td>
+      <td>{{ p.medicine }}</td>
+      <td>{{ p.dosage }}</td>
+      <td>{{ appointmentLabel(p.appointmentId) }}</td>
+      <td>
+        <a class="btn btn-edit" [routerLink]="['/prescriptions', p.id, 'edit']"> Edit </a>
+        <button class="btn btn-delete" (click)="remove(p.id!)" [disabled]="loading">
+            {{ loading ? 'Deleting...' : 'Delete' }}
+        </button>
+          
+      </td>
+    </tr>
+  </tbody>
+</table>

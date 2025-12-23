@@ -1,0 +1,34 @@
+<h2>{{ isEdit ? 'Edit Prescription' : 'Create Prescription' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form">
+
+  <label>
+    Appointment
+    <select formControlName="appointmentId">
+      <option [ngValue]="null" disabled>Select an appointment</option>
+      <option *ngFor="let a of appointments" [ngValue]="a.id">
+        #{{ a.id }} — {{ formatDateTime(a.dateTime) }} — {{ a.reason }}
+      </option>
+    </select>
+  </label>
+
+  <label>
+    Medicine
+    <input type="text" formControlName="medicine" placeholder="e.g. Amoxicillin">
+  </label>
+
+  <label>
+    Dosage
+    <input type="text" formControlName="dosage" placeholder="e.g. 500mg, 3x/day">
+  </label>
+
+  <div class="error" *ngIf="error">{{ error }}</div>
+
+  <div class="actions">
+    <button type="submit" [disabled]="loading">
+      {{ loading ? 'Saving...' : 'Save' }}
+    </button>
+    <button type="button" (click)="cancel()" [disabled]="loading">Cancel</button>
+  </div>
+
+</form>
