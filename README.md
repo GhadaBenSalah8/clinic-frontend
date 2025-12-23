@@ -1,38 +1,68 @@
-Clinic Management System – Frontend (Angular)
-* Project Overview
+Clinic Management Frontend
+1. Project Overview
 
-This project is the frontend part of the Clinic Management System developed during DS2 – Web Development (Frontend Angular).
+This Angular application is the frontend part of the Clinic Management System developed during DS2 Web Development (Frontend Angular).
 
-It is built with Angular and consumes the Spring Boot REST API developed in DS1.
-The application allows clinic administrators to manage:
+It communicates with the Spring Boot backend (DS1) via REST APIs and allows a clinic administrator to manage all clinic operations through an intuitive user interface.
 
-Patients
+Features
 
-Doctors
+View, add, update, and delete Patients
 
-Appointments
+View, add, update, and delete Doctors
 
-Prescriptions
+Schedule and manage Appointments
 
-through a modern, intuitive dashboard.
+Manage Prescriptions linked to completed appointments
 
- * Technologies Used
+Dashboard with statistics (Doctors / Patients / Appointments)
 
-Angular
+Navigation between views using Angular Router
 
-TypeScript
+Form validation and error handling
 
-HTML / CSS
+Responsive and styled UI
 
-Angular Router
+* Technologies Used
+Technology	Description
+Angular	Frontend framework
+TypeScript	Programming language
+HTML / CSS	UI structure and styling
+Angular Router	Navigation & routing
+HttpClient	Front–Back communication
+Reactive Forms	Form handling & validation
+ 3. Project Structure 
+src/app/
+├── components/
+│   ├── home/
+│   ├── patient-list/
+│   ├── patient-form/
+│   ├── doctor-list/
+│   ├── doctor-form/
+│   ├── appointment-list/
+│   ├── appointment-form/
+│   ├── prescription-list/
+│   └── prescription-form/
+│
+├── model/
+│   ├── patient.model.ts
+│   ├── doctor.model.ts
+│   ├── appointment.model.ts
+│   └── prescription.model.ts
+│
+├── service/
+│   ├── patient.service.ts
+│   ├── doctor.service.ts
+│   ├── appointment.service.ts
+│   └── prescription.service.ts
+│
+├── app.routes.ts
+└── app.component.*
 
-HttpClient
 
-Reactive Forms
-Routing & Navigation
+this structure strictly follows DS2 requirements
 
-The application uses Angular Router to navigate between views:
-
+ 4. Routing & Navigation
 Route	Description
 /	Home dashboard
 /patients	List patients
@@ -41,17 +71,23 @@ Route	Description
 /doctors	List doctors
 /appointments	List appointments
 /prescriptions	List prescriptions
-Backend Connection
 
-The frontend communicates with the Spring Boot backend via REST APIs.
+Navigation is handled using Angular Router.
 
-API base URL is configured in:
+ 5. Front–Back Connection
 
-src/environments/environment.ts
+The frontend communicates with the Spring Boot backend using HttpClient.
 
+Backend base URL configuration:
+
+//in src/environments/environment.ts
 export const environment = {
   apiUrl: 'http://localhost:8081/api'
 };
 
 
-Each entity has its own Angular service using HttpClient to perform CRUD operations.
+Each entity has its own Angular service implementing full CRUD operations.
+
+Author
+Ghada Ben Salah
+Student | Full-Stack Developer
